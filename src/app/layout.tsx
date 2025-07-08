@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import { themeConfig } from '@/lib/theme.config'
-import { ThemeProvider, ThemeScript } from '@vapor-ui/core'
-import '@vapor-ui/core/dist/styles.css'
+import { ThemeClientProvider } from '@/components/ThemeClientProvider'
+import '@vapor-ui/core/styles.css'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -19,15 +18,10 @@ export default function RootLayout({
     // 서버와 클라이언트의 초기 테마 속성 불일치로 인한 경고를 방지합니다.
     <html lang='ko' suppressHydrationWarning>
       <head>
-        {/* FOUC 방지를 위한 스크립트입니다.
-            <head> 태그의 최상단에 위치하는 것을 권장합니다. */}
-        <ThemeScript config={themeConfig} />
+        {/* FOUC 방지를 위한 스크립트는 ThemeClientProvider 내부에서 처리됩니다 */}
       </head>
       <body>
-        {/* 동적 테마 관리를 위한 프로바이더 */}
-        <ThemeProvider config={themeConfig}>
-          <main>{children}</main>
-        </ThemeProvider>
+        <ThemeClientProvider>{children}</ThemeClientProvider>
       </body>
     </html>
   )

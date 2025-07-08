@@ -1,3 +1,5 @@
+'use client'
+
 import { createThemeConfig } from '@vapor-ui/core'
 
 export const themeConfig = createThemeConfig({
